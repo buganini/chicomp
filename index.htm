@@ -32,10 +32,16 @@
 			})
 			o.droppable({
 				drop: function(event, ui){
-					var d=ui.draggable
-					var v=sequence[$(this).attr('no')]
-					sequence[$(this).attr('no')]=sequence[d.attr('no')]
-					sequence[d.attr('no')]=v
+					var t=sequence
+					var n=ui.draggable.attr('no')
+					sequence=[]
+					for(var i=0;i<t.length;++i){
+						if(i==n)
+							continue
+						if(i==$(this).attr('no'))
+							sequence[sequence.length]=t[n]
+						sequence[sequence.length]=t[i]
+					}
 					redraw()
 				}
 			})
