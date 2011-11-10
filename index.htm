@@ -18,6 +18,10 @@
 		for(var i=0;i<sequence.length;++i){
 			var o=$('<img src="images/'+sequence[i]+'.gif" no="'+i+'" />')
 			$('#edit').append(o)
+			o.dblclick(function(){
+				sequence[sequence.length]=sequence[$(this).attr('no')]
+				redraw()
+			})
 			o.draggable({
 				containment: '#edit'
 			})
