@@ -9,5 +9,10 @@ if($_REQUEST['action']=='DECOMP'){
 	$s=bsdconv($p, $_POST['data']);
 	bsdconv_destroy($p);
 	echo json_encode($s);
+}elseif($_REQUEST['action']=='INFO'){
+	$p=bsdconv_create("utf-8:ascii-html-info");
+	$s=bsdconv($p, $_POST['data']);
+	bsdconv_destroy($p);
+	echo $s;
 }
 ?>

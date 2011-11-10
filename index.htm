@@ -77,6 +77,19 @@
 			async:false,
 			success: function(j){
 				$('#result').val(j)
+						$.ajax({
+							url: "engine.php",
+							type: "POST",
+							data: {
+								action: 'INFO',
+								data : j
+							},
+							dataType: "html",
+							async:false,
+							success: function(j){
+								$('#info').html(j)
+							}
+						});
 			}
 		});
 	})
