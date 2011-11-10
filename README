@@ -1,0 +1,7 @@
+Demo: http://cnmc.tw/~buganini/chicomp/
+
+Dependencies:
+	bsdconv-6.5+
+	php-bsdconv
+	php-json
+	
