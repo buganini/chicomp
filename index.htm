@@ -1,0 +1,68 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+</head>
+<body>
+<input type="text" id="text" /><input type="button" id="decomp" value="Decomp" />
+<hr />
+<span id="edit"></span><input type="button" id="comp" value="Comp" />
+<hr />
+<div id="info"></div>
+<textarea id="result"></textarea>
+<script type="text/javascript">
+	sequence=[]
+	function redraw(){
+		$('#edit').html('')
+		for(var i=0;i<sequence.length;++i){
+			var o=$('<img src="images/'+sequence[i]+'.gif" no="'+i+'" />')
+			$('#edit').append(o)
+			o.draggable({
+				containment: '#edit'
+			})
+			o.droppable({
+				drop: function(event, ui){
+					var d=ui.draggable
+					var v=sequence[$(this).attr('no')]
+					sequence[$(this).attr('no')]=sequence[d.attr('no')]
+					sequence[d.attr('no')]=v
+					redraw()
+				}
+			})
+		}
+	}
+	$('#decomp').click(function(){
+		$.ajax({
+			url: "engine.php",
+			type: "POST",
+			data: {
+				action: 'DECOMP',
+				data : $('#text').val()
+			},
+			dataType: "json",
+			async:false,
+			success: function(j){
+				sequence=j
+				redraw()
+			}
+		});
+	})
+	$('#comp').click(function(){
+		$.ajax({
+			url: "engine.php",
+			type: "POST",
+			data: {
+				action: 'COMP',
+				data : sequence.join(',')
+			},
+			dataType: "json",
+			async:false,
+			success: function(j){
+				$('#result').val(j)
+			}
+		});
+	})
+</script>
+</body>
+</html>
