@@ -21,7 +21,7 @@
 	function redraw(){
 		$('#edit').html('')
 		for(var i=0;i<sequence.length;++i){
-			var o=$('<img src="images/'+sequence[i]+'.gif" no="'+i+'" />')
+			var o=$('<img src="images/'+sequence[i]+'.gif" title="'+sequence[i]+'" no="'+i+'" />')
 			$('#edit').append(o)
 			o.dblclick(function(){
 				sequence[sequence.length]=sequence[$(this).attr('no')]
