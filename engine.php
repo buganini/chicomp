@@ -7,7 +7,7 @@ if($_REQUEST['action']=='DECOMP'){
 	if($s=='')
 		echo json_encode(array());
 	else
-		echo json_encode(explode(',',));
+		echo json_encode(explode(',',$s));
 }elseif($_REQUEST['action']=='COMP'){
 	$p=bsdconv_create("bsdconv:zh_comp:utf-8");
 	$s=bsdconv($p, $_POST['data']);
