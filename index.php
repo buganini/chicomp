@@ -7,6 +7,9 @@
 .hovered {
 	border-left: solid 2px #abf;
 }
+.redback {
+	background-color: #f00;
+}
 img {
 	margin: 1px;
 }
@@ -71,9 +74,10 @@ img {
 				}
 			})
 		}
-		var o=$('<a style="margin:3em;">[-]</a>')
+		var o=$('<a style="margin:3em; padding: 0.5em;">[-]</a>')
 		$('#edit').append(o)
 		o.droppable({
+			hoverClass: 'redback',
 			drop: function(event, ui){
 				var t=sequence
 				sequence=[]
