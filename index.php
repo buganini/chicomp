@@ -115,7 +115,7 @@ img {
 				action: 'COMP',
 				data : sequence.join(',')
 			},
-			dataType: "json",
+			dataType: "text",
 			async:false,
 			success: function(j){
 				$('#result').val(j)

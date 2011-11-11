@@ -15,7 +15,7 @@ if($_REQUEST['action']=='DECOMP'){
 	$p=bsdconv_create("bsdconv:zh_comp:utf-8");
 	$s=bsdconv($p, $_POST['data']);
 	bsdconv_destroy($p);
-	echo json_encode($s);
+	echo $s;
 }elseif($_REQUEST['action']=='INFO'){
 	$p=bsdconv_create("utf-8:ascii-html-info");
 	$s=bsdconv($p, $_POST['data']);
