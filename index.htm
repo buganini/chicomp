@@ -12,7 +12,7 @@
 <body>
 <input type="text" id="text" /><input type="button" id="decomp" value="Decomp" />
 <hr />
-<span id="edit"></span><input type="button" id="comp" value="Comp" />
+<span id="edit"></span><input type="button" id="comp" value="Comp" /><input type="button" id="clear" value="Clear" />
 <hr />
 <div id="info"></div>
 <textarea id="result"></textarea>
@@ -77,7 +77,9 @@
 			dataType: "json",
 			async:false,
 			success: function(j){
-				sequence=j
+				for(var i=0;i<j.length;++i){
+					sequence[sequence.length]=j[i]
+				}
 				redraw()
 			}
 		});
@@ -110,6 +112,11 @@
 			}
 		});
 	})
+	$('#clear').click(function(){
+		sequence=[]
+		redraw()
+	})
+	redraw()
 </script>
 </body>
 </html>
