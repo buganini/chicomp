@@ -4,10 +4,13 @@ if($_REQUEST['action']=='DECOMP'){
 	$s=bsdconv($p, $_POST['data']);
 	bsdconv_destroy($p);
 	$s=trim($s,',');
-	if($s=='')
-		echo json_encode(array());
-	else
-		echo json_encode(explode(',',$s));
+	$r=array();
+	$a=explode(',',$s);
+	foreach($a as $c){
+		if(substr($c,0,2)=='04')
+			$r[]=$c;
+	}
+	echo json_encode($r);
 }elseif($_REQUEST['action']=='COMP'){
 	$p=bsdconv_create("bsdconv:zh_comp:utf-8");
 	$s=bsdconv($p, $_POST['data']);
