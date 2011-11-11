@@ -7,6 +7,9 @@
 .hovered {
 	border-left: solid 2px #abf;
 }
+img {
+	margin: 1px;
+}
 </style>
 </head>
 <body>
@@ -21,6 +24,16 @@
 1. Drag component to rearrange<br />
 2. Double click to duplicate component<br/>
 3. Drag into [-] to delete component
+<hr />
+<span id="comps">
+<?php
+	$files=scandir('images');
+	foreach($files as $file){
+		if($file=='.' || $file=='..') continue;
+		$n=str_replace('.gif','',$file);
+		echo '<img src="images/'.$file.'" title="'.$n.'" alt="'.$n.'" />';
+	}
+?></span>
 <script type="text/javascript">
 	sequence=[]
 	function redraw(){
@@ -114,6 +127,10 @@
 	})
 	$('#clear').click(function(){
 		sequence=[]
+		redraw()
+	})
+	$('#comps img').click(function(){
+		sequence[sequence.length]=$(this).attr('alt')
 		redraw()
 	})
 	redraw()
