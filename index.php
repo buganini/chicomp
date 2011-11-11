@@ -8,7 +8,7 @@
 	border-left: solid 2px #abf;
 }
 .redback {
-	background-color: #f00;
+	background-color: #fdd;
 }
 img {
 	margin: 1px;
