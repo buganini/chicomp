@@ -27,7 +27,13 @@ img {
 <hr />
 <span id="comps">
 <?php
+	function ucmp($a,$b){
+		$a=base_convert(substr($a,2),16,10);
+		$b=base_convert(substr($b,2),16,10);
+		return $a-$b;
+	}
 	$files=scandir('images');
+	usort($files,'ucmp');
 	foreach($files as $file){
 		if($file=='.' || $file=='..') continue;
 		$n=str_replace('.gif','',$file);
