@@ -74,7 +74,7 @@ img {
 				}
 			})
 		}
-		var o=$('<a style="margin:3em; padding: 0.5em;">[-]</a>')
+		var o=$('<a style="margin:3em; padding: 0.5em;">[&#x4EA9;]</a>')
 		$('#edit').append(o)
 		o.droppable({
 			hoverClass: 'redback',
