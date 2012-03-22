@@ -45,6 +45,21 @@ img {
 ?></span>
 <script type="text/javascript">
 	sequence=[]
+
+	function dropfunc(event, ui){
+		var t=sequence
+		var n=ui.draggable.attr('no')
+		sequence=[]
+		for(var i=0;i<t.length;++i){
+			if(i==n)
+				continue
+			if(i==$(this).attr('no'))
+				sequence[sequence.length]=t[n]
+			sequence[sequence.length]=t[i]
+		}
+		redraw()
+	}
+
 	function redraw(){
 		$('#edit').html('')
 		for(var i=0;i<sequence.length;++i){
@@ -59,21 +74,19 @@ img {
 			})
 			o.droppable({
 				hoverClass: 'hovered',
-				drop: function(event, ui){
-					var t=sequence
-					var n=ui.draggable.attr('no')
-					sequence=[]
-					for(var i=0;i<t.length;++i){
-						if(i==n)
-							continue
-						if(i==$(this).attr('no'))
-							sequence[sequence.length]=t[n]
-						sequence[sequence.length]=t[i]
-					}
-					redraw()
-				}
+				drop: dropfunc
 			})
 		}
+		var o=$('<img src="images/null.gif" no="'+i+'" />')
+		$('#edit').append(o)
+		o.dblclick(function(){
+			sequence[sequence.length]=sequence[$(this).attr('no')]
+			redraw()
+		})
+		o.droppable({
+			hoverClass: 'hovered',
+			drop: dropfunc
+		})
 		var o=$('<a style="margin:3em; padding: 0.5em;">[&#x4EA9;]</a>')
 		$('#edit').append(o)
 		o.droppable({
