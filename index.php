@@ -57,6 +57,8 @@ img {
 				sequence[sequence.length]=t[n]
 			sequence[sequence.length]=t[i]
 		}
+		if(i==$(this).attr('no'))
+			sequence[sequence.length]=t[n]
 		redraw()
 	}
 
