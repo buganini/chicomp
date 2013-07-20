@@ -174,6 +174,7 @@ img {
 				for(var i=0;i<j.length;++i){
 					sequence[sequence.length]=j[i]
 				}
+				redraw()
 				$("#comp").click();
 			}
 		})
