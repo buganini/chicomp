@@ -159,6 +159,25 @@ img {
 		redraw()
 	})
 	redraw()
+	if(document.location.hash){
+		$("#text").val(document.location.hash.substring(1));
+		$.ajax({
+			url: "engine.php",
+			type: "POST",
+			data: {
+				action: 'DECOMP',
+				data : $('#text').val()
+			},
+			dataType: "json",
+			async:false,
+			success: function(j){
+				for(var i=0;i<j.length;++i){
+					sequence[sequence.length]=j[i]
+				}
+				$("#comp").click();
+			}
+		})
+	}
 </script>
 </body>
 </html>
