@@ -26,7 +26,7 @@ img {
 <h3>Hints:</h3>
 1. Drag component to rearrange<br />
 2. Double click to duplicate component<br/>
-3. Drag into [-] to delete component
+3. Drag into [&#x4EA9;] to delete component
 <hr />
 <span id="comps">
 <?php
