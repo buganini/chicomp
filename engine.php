@@ -1,6 +1,6 @@
 <?php
 if($_REQUEST['action']=='DECOMP'){
-	$c=new Bsdconv("utf-8:zh_decomp:split:bsdconv_keyword,bsdconv");
+	$c=new Bsdconv("utf-8:zh-decomp:split:bsdconv-keyword,bsdconv");
 	$s=$c->conv($_POST['data']);
 	unset($c);
 	$s=trim($s,',');
@@ -12,7 +12,7 @@ if($_REQUEST['action']=='DECOMP'){
 	}
 	echo json_encode($r);
 }elseif($_REQUEST['action']=='COMP'){
-	$c=new Bsdconv("bsdconv:zh_comp:utf-8");
+	$c=new Bsdconv("bsdconv:zh-comp:utf-8");
 	$s=$c->conv($_POST['data']);
 	unset($c);
 	echo $s;
