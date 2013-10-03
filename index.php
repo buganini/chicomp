@@ -160,7 +160,7 @@ img {
 	})
 	redraw()
 	if(document.location.hash){
-		$("#text").val(document.location.hash.substring(1));
+		$("#text").val(decodeURIComponent(document.location.hash.substring(1)));
 		$.ajax({
 			url: "engine.php",
 			type: "POST",
