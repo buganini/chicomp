@@ -28,7 +28,7 @@ img {
 <input type="text" v-model="q" /><input type="button" @click="decomp()" value="Decomp" />
 <hr />
 <draggable class="drag" :list="edit" :options="{group:'chicomp'}">
-	<img v-for="c in edit" v-bind:src="'images/' + c + '.gif'" :title="c" />
+	<img v-for="c in edit" v-bind:src="'images/' + c + '.gif'" :title="c" @dblclick="append(c)" />
 </draggable>
 <draggable class="drop" :list="trash" :options="{group:'chicomp'}" @change="dump">
 		<a style="margin:3em; padding: 0.5em;" title="Trash Bin">[&#x4EA9;]</a>
@@ -44,6 +44,7 @@ img {
 <hr />
 <h3>Hints:</h3>
 * Drag component to rearrange<br />
+* Double click to duplicate component<br />
 * Drag into [&#x4EA9;] to delete component
 <hr />
 <span>
