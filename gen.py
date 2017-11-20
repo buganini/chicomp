@@ -25,11 +25,13 @@ for pg in compmap:
 
 for pg in compmap:
     ps = []
+    print(pg)
     for p in compmap[pg]:
         pf = os.path.join(parts_folder, p+".jpg")
         if os.path.exists(pf):
             ps.append(pf)
+        else:
+            print("\tSkip", p)
     if ps:
         gif = pg+".gif"
-        print(gif)
         subprocess.call(["convert", "-loop", "0", "-delay", "50"]+ps+[os.path.join(images_folder, gif)])
