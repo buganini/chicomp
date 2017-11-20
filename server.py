@@ -20,7 +20,7 @@ async def list_handler(request):
 
 async def decomp_handler(request):
     c = Bsdconv("utf-8:zh-decomp:split:bsdconv-keyword,bsdconv")
-    a = c.conv(request.GET["q"]).decode("utf-8").split(",")
+    a = c.conv(request.GET["q"]).decode("utf-8").strip(",").split(",")
     return web.json_response(a)
 
 async def comp_handler(request):
