@@ -21,6 +21,9 @@ img {
 .drop > img {
 	display: none;
 }
+.list > img {
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -47,7 +50,7 @@ img {
 * Double click to duplicate component<br />
 * Drag into [&#x4EA9;] to delete component
 <hr />
-<span>
+<span class="list">
 	<img v-for="c in list" v-bind:src="'images/' + c + '.gif'" v-bind:title="c" @click="append(c)" />
 </span>
 </div>
