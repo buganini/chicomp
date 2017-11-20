@@ -1,0 +1,120 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Sortable/1.6.0/Sortable.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.15.0/vuedraggable.min.js"></script>
+<style type="text/css">
+.hovered {
+	border-left: solid 2px #abf;
+}
+.redback {
+	background-color: #fdd;
+}
+img {
+	margin: 1px;
+}
+.drag, .drop {
+	display: inline;
+}
+.drop > img {
+	display: none;
+}
+</style>
+</head>
+<body>
+<div id="app">
+<input type="text" v-model="q" /><input type="button" @click="decomp()" value="Decomp" />
+<hr />
+<draggable class="drag" :list="edit" :options="{group:'chicomp'}">
+	<img v-for="c in edit" v-bind:src="'images/' + c + '.gif'" :title="c" />
+</draggable>
+<draggable class="drop" :list="trash" :options="{group:'chicomp'}" @change="dump">
+		<a style="margin:3em; padding: 0.5em;" title="Trash Bin">[&#x4EA9;]</a>
+</draggable>
+<input type="button" @click="comp()" value="Comp" /><input type="button" @click="clear()" value="Clear" />
+<hr />
+<input type="text" v-model="result" />
+<div>
+	<a v-for="c in info" :href="'http://www.cns11643.gov.tw/AIDB/query_general_view.do?page='+c['p']+'&amp;code='+c['c']">
+		<img :src="'http://www.cns11643.gov.tw/cgi-bin/ttf2png?page='+parseInt(c['p'],16)+'&amp;number='+c['c']+'&amp;face=sung&amp;fontsize=32'" :title="c['u']" :alt="c['u']" />
+	</a>
+</div>
+<hr />
+<h3>Hints:</h3>
+* Drag component to rearrange<br />
+* Drag into [&#x4EA9;] to delete component
+<hr />
+<span>
+	<img v-for="c in list" v-bind:src="'images/' + c + '.gif'" v-bind:title="c" @click="append(c)" />
+</span>
+</div>
+<script type="text/javascript">
+	var app = new Vue({
+	  el: '#app',
+	  data: {
+			q: "",
+	    list: [],
+	    edit: [],
+			trash: [],
+			result: "",
+			info: []
+	  },
+		watch: {
+			result: function(){
+				$.get(
+					"info",
+					{"q":app.result},
+					function(data){
+						app.info = data;
+					},
+					"json"
+				);
+			}
+		},
+	  mounted: function(){
+			$.get(
+				"list",
+				{},
+				function(data){
+					app.list = data;
+				},
+				"json"
+			);
+	  },
+	  methods: {
+			append: function(c){
+				this.edit.push(c);
+			},
+			dump: function(){
+				this.trash = [];
+			},
+			clear: function(){
+				this.edit = [];
+			},
+			decomp: function(){
+				$.get(
+					"decomp",
+					{"q":this.q},
+					function(data){
+						app.edit = data;
+					},
+					"json"
+				);
+			},
+			comp: function(){
+				$.get(
+					"comp",
+					{"q":this.edit.join(",")},
+					function(data){
+						app.result = data["result"];
+					},
+					"json"
+				);
+			}
+	  }
+	});
+</script>
+</body>
+</html>
