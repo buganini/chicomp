@@ -14,6 +14,8 @@ async def index_handler(request):
 async def list_handler(request):
     l = [os.path.splitext(x)[0] for x in os.listdir(images_folder)]
     l.sort(key=lambda x:(len(x), x))
+    l.remove("0400")
+    l.append("0400")
     return web.json_response(l)
 
 async def decomp_handler(request):
