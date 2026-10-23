@@ -10,7 +10,6 @@ import re
 import shlex
 import shutil
 import subprocess
-import urllib.request
 from zipfile import ZipFile
 
 import zstandard
@@ -50,9 +49,17 @@ def properties():
     archive = WORK / "Properties.zip"
     if not archive.exists():
         temp = archive.with_suffix(".zip.tmp")
-        with urllib.request.urlopen(spec["url"], timeout=60) as response, temp.open("wb") as out:
-            shutil.copyfileobj(response, out)
-        temp.replace(archive)
+        # Use curl's TLS backend for compatibility with the CNS certificate chain.
+        try:
+            run(["curl", "--fail", "--location", "--silent", "--show-error", "--retry", "3",
+                 "--connect-timeout", "15", "--max-time", "120",
+                 "--proto", "=https", "--proto-redir", "=https",
+                 "--output", temp, spec["url"]])
+            if hashlib.sha256(temp.read_bytes()).hexdigest() != spec["sha256"]:
+                raise RuntimeError("Properties.zip changed: review its version and SHA-256 before updating sources.lock.json")
+            temp.replace(archive)
+        finally:
+            temp.unlink(missing_ok=True)
     if hashlib.sha256(archive.read_bytes()).hexdigest() != spec["sha256"]:
         raise RuntimeError("Properties.zip changed: review its version and SHA-256 before updating sources.lock.json")
     directory = WORK / "properties"

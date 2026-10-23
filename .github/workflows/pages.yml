@@ -25,7 +25,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y imagemagick
+          sudo apt-get install -y curl imagemagick
           python -m pip install -r requirements.txt
           npm ci
       - name: Set up Emscripten

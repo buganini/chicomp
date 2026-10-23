@@ -36,7 +36,7 @@ HTTPS 或 localhost。沒有 Python API server，也不依賴 jQuery／Vue。
 
 ## 本機建置
 
-需要 Python 3.10+、Node.js 22、C compiler、Git、ImageMagick，及
+需要 Python 3.10+、Node.js 22、C compiler、Git、curl、ImageMagick，及
 `sources.lock.json` 指定版本的 Emscripten（目前為 6.0.13）。先啟用
 Emscripten 的 `emsdk_env.sh`，再執行：
 
