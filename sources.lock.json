@@ -1,0 +1,17 @@
+{
+  "emscripten": "6.0.13",
+  "emsdk_commit": "d7b4130688bfa348392b921ab04015aa15c4f154",
+  "bsdconv": {
+    "url": "https://github.com/buganini/bsdconv.git",
+    "commit": "12ce5206d5d5b14c26d8de9a49b8cc630551104a"
+  },
+  "cns11643": {
+    "url": "https://github.com/buganini/bsdconv-cns11643.git",
+    "commit": "953a5396906e5e31973243ae2350664af19db4cc"
+  },
+  "properties": {
+    "url": "https://data.cns11643.gov.tw/opendata/Properties.zip",
+    "version": "20260805",
+    "sha256": "3d56ef14cc8099893245dac58fe4718d2fa64812b9159352a98a4588ad3efa5c"
+  }
+}

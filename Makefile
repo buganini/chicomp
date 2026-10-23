@@ -1,12 +1,15 @@
-WORKDIR=/nonexists
+PYTHON?=python3
+BSDCONV_SRC?=
+CNS11643_SRC?=
 
-all: gen
+.PHONY: all build run clean
+all: run
 
-gen: ${WORKDIR}/parts ${WORKDIR}/parts/1111.jpg
-	python3 gen.py ${WORKDIR}/data/Open_Data/compmap.json ${WORKDIR}/parts images
+build:
+	$(PYTHON) scripts/build.py $(if $(BSDCONV_SRC),--bsdconv "$(BSDCONV_SRC)") $(if $(CNS11643_SRC),--cns11643 "$(CNS11643_SRC)")
 
-${WORKDIR}/parts:
-	unzip -d ${WORKDIR} ${WORKDIR}/data/Open_Data/Properties/CNS_component_word.zip
+run: build
+	$(PYTHON) -m http.server 8000 --bind 127.0.0.1 --directory dist
 
-${WORKDIR}/parts/1111.jpg:
-	wget -O ${WORKDIR}/parts/1111.jpg http://www.cns11643.gov.tw/AIDB/images/parts/1111.jpg
+clean:
+	rm -rf .build dist
