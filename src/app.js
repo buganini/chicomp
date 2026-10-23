@@ -21,11 +21,12 @@ function request(action,input) {
 }
 function ready() {
   available=runtimeReady&&libraryReady;
-  if(available){$('status').textContent='已就緒 · 所有轉換均在本機完成';$('status').classList.add('ready');}
+  $('status').hidden=available;
   controls();
 }
 function fatal(message) {
   available=false; busy=false; runtimeReady=false;
+  $('status').hidden=false;
   $('status').textContent='載入失敗，請重新整理頁面重試';
   error(message);
   for(const task of pending.values()) task.reject(new Error(message));
