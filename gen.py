@@ -27,7 +27,9 @@ def generate(properties, output):
         missing = [str(p) for p in frames if not p.is_file()]
         if missing:
             raise RuntimeError(f"Missing component images: {missing}")
-        subprocess.run([command, "-delay", "50", "-loop", "0", *map(str, frames),
+        # Transparent PNG frames must clear the previous frame before drawing.
+        subprocess.run([command, "-delay", "50", "-loop", "0",
+                        "-background", "none", "-dispose", "Background", *map(str, frames),
                         "-resize", "48x48", "-strip", str(output / f"{code}.gif")], check=True)
         manifest.append({"code": code, "image": f"images/{code}.gif",
                          "strokes": min(strokes for _, strokes in entries)})
