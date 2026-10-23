@@ -77,7 +77,8 @@ CNS 碼表直接取自鎖定 repo 的文字檔，本機編譯成 binary，不在
 
 原本 repo 根目錄的 `images/` 已改為建置時產生的 `dist/images/`。
 `.build/`、`dist/`、`node_modules/`、圖片與 binary 產物都不提交到 Git。
-特殊部件「特」依目前官方部件集合編碼產生，沒有硬編碼舊版 `0400`。
+特殊部件「特」（官方 ID `1111`）與未定義的部件 ID 統一對應 `0400`，
+共用「特」圖示，並放在部件庫最後。
 
 ## GitHub Pages
 

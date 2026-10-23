@@ -7,7 +7,7 @@
   },
   "cns11643": {
     "url": "https://github.com/buganini/bsdconv-cns11643.git",
-    "commit": "953a5396906e5e31973243ae2350664af19db4cc"
+    "commit": "cd327c2fb54a735fedc12db4d51e86948dc763d0"
   },
   "properties": {
     "url": "https://data.cns11643.gov.tw/opendata/Properties.zip",

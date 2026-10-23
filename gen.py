@@ -16,13 +16,13 @@ def generate(properties, output):
     for line in (properties / "CNS_component_word.txt").read_text(encoding="utf-8").splitlines():
         part, group, strokes = map(int, line.split())
         code = f"{group:X}"
-        code = "04" + code.zfill(len(code) + len(code) % 2)
+        code = "0400" if part == 1111 else "04" + code.zfill(len(code) + len(code) % 2)
         groups.setdefault(code, []).append((part, strokes))
     command = shutil.which("magick") or shutil.which("convert")
     if not command:
         raise RuntimeError("Install ImageMagick (magick or convert)")
     manifest = []
-    for code, entries in sorted(groups.items(), key=lambda item: int(item[0], 16)):
+    for code, entries in sorted(groups.items(), key=lambda item: (item[0] == "0400", int(item[0], 16))):
         frames = [parts / f"{part}.png" for part, _ in sorted(entries)]
         missing = [str(p) for p in frames if not p.is_file()]
         if missing:
